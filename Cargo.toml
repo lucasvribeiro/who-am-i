@@ -1,0 +1,7 @@
+[package]
+name = "who-i-am"
+version = "0.1.0"
+authors = ["Lucas Ribeiro <lucasvribeiro14@gmail.com>"]
+edition = "2018"
+
+[dependencies]
