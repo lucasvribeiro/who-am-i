@@ -2,7 +2,10 @@ use std::thread;
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::io::{Read, Write};
 use std::str::from_utf8;
+use tokio::prelude::*;
+use tokio::timer::Delay;
 
+use std::time::{Instant, Duration};
 
 fn handle_client(mut stream: TcpStream) {
     let mut data = [0 as u8; 50]; // using 50 byte buffer
@@ -24,7 +27,28 @@ fn handle_client(mut stream: TcpStream) {
     } {}
 }
 
-fn main() {
+pub fn start_game() {
+    let teste = Instant::now();
+    // println!("Ligou: {:?} ", when);
+    
+    // start_server();
+
+    // define intervalo para inicio da partida
+    let start_time = Instant::now() + Duration::from_millis(10000); // em milisegundos
+    tokio::run({
+        Delay::new(start_time)
+            .map_err(|e| panic!("timer failed; err={:?}", e))
+            .and_then(|_| {
+                println!("Hello world!");
+                Ok(())
+            })
+    });
+    let test2 = Instant::now();
+    let tempo = test2 - teste;
+    println!("Tempo: {:?}", tempo);
+}
+
+fn start_server() {
     let listener = TcpListener::bind("127.0.0.1:3333").unwrap();
     // accept connections and process them, spawning a new thread for each one
     println!("Server listening on port 3333");
