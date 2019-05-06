@@ -7,11 +7,9 @@ use std::collections::HashMap;
 
 use std::time::{Instant, Duration};
 
-static mut v: Vec<i32> = Vec::new();
-
-fn handle_client(mut stream: TcpStream) {
+fn handle_client(jogador: &(String, i32, String, TcpStream)) {
     let mut data = [0 as u8; 50]; // using 50 byte buffer
-    // let mut jogadores = Vec::new();
+    let mut stream = &jogador.3;
     while match stream.read(&mut data) {
         Ok(size) => {
             println!("Dados do cliente: {}", from_utf8(&data[0..size]).unwrap());
@@ -44,8 +42,10 @@ pub fn start_game() {
 }
 
 fn start_server(start_time: Instant) {
+    let mut v = Vec::new();
+    
     let mut current_time = Instant::now();                              // usado para controlar tempo pre partida
-    let duracao = Duration::from_millis(10000);                         // tempo para jogadores se conectarem
+    let duracao = Duration::from_millis(20000);                         // tempo para jogadores se conectarem
     let listener = TcpListener::bind("127.0.0.1:3333").unwrap();        // defina porta para escuta
 
     // unsafe {let pontoxio = GAME.jogadores.get("Jogador");
@@ -61,10 +61,14 @@ fn start_server(start_time: Instant) {
                 // contrala tempo para jogadores se conectarem antes da partida
                 if current_time-start_time < duracao {
                     println!("New connection: {}", stream.peer_addr().unwrap());
-                    thread::spawn(move|| {
+                    let mut x : i32 = 0;
+                    let mut j = ("Jogador".to_string(), x, "Mensagem".to_string(), stream);
+                    v.push(("Jogador".to_string(), x, "Mensagem".to_string(), move||{stream}));
+                    // handle_client(stream);
+                    thread::spawn(
                         // connection succeeded
-                        handle_client(stream)
-                    });
+                        handle_client(&v[0]);
+                    );
                 }
             }
             Err(e) => {
