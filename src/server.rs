@@ -7,10 +7,7 @@ use std::collections::HashMap;
 
 use std::time::{Instant, Duration};
 
-static mut GAME: GameStruct = GameStruct {
-    jogadores: HashMap::new(),
-    mensagem: String::new(),
-};
+static mut v: Vec<i32> = Vec::new();
 
 fn handle_client(mut stream: TcpStream) {
     let mut data = [0 as u8; 50]; // using 50 byte buffer
@@ -39,7 +36,7 @@ pub fn start_game() {
 
     // let mut jogadores = HashMap::new();
 
-    unsafe {GAME.jogadores.insert("Jogador".to_string(), (0, "Mensagem".to_string()));}
+    // unsafe {GAME.jogadores.insert("Jogador".to_string(), (0, "Mensagem".to_string()));}
     // jogadores.insert("Jogador".to_string(), (0, "Mensagem".to_string()));
     // let jogador = ("", 0, ""); // (nome, pontos, mensagem)
     
@@ -51,8 +48,8 @@ fn start_server(start_time: Instant) {
     let duracao = Duration::from_millis(10000);                         // tempo para jogadores se conectarem
     let listener = TcpListener::bind("127.0.0.1:3333").unwrap();        // defina porta para escuta
 
-    unsafe {let pontoxio = GAME.jogadores.get("Jogador");
-    println!("AQEUII: {:?}", pontoxio);}
+    // unsafe {let pontoxio = GAME.jogadores.get("Jogador");
+    // println!("AQEUII: {:?}", pontoxio);}
 
 
     // accept connections and process them, spawning a new thread for each one
