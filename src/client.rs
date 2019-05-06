@@ -17,12 +17,16 @@ fn main() {
             //envia nome do jogador ao servidor
             stream.write(nome.as_bytes()).unwrap();
 
+            println!("--------------------------------");
+            println!("{:?} aguarde o início da partida", nome);
+
             //dados a serem recebidos do servidor
             let mut data = [0 as u8; 50];
             while match stream.read(&mut data) {
                 Ok(size) => {
-                  let novo_jogador = from_utf8(&data).unwrap();
-                  println!("[NOVO JOGADOR CONECTADO: ] {}", novo_jogador);
+                //   let novo_jogador = from_utf8(&data).unwrap();
+                //   println!("--------------------------------");
+                //   println!("{} aguarde o início da partida", novo_jogador);
                   true
                 },
                 Err(_) => {
