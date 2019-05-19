@@ -1,4 +1,4 @@
-pub mod server;
+// pub mod server;
 
 // extern crate tokio;
 
@@ -6,6 +6,6 @@ pub mod server;
 // use tokio::net::TcpStream;
 // use tokio::prelude::*;
 
-fn main() {
-    server::start_game();
-}
+// fn main() {
+//     server::start_game();
+// }
