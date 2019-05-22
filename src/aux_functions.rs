@@ -3,7 +3,7 @@ use std::io::{self, BufRead, Write};
 //Arquivo para teste e criação de funções auxiliares
 
 
-//Faze leitura do nome do jogador
+// Faz leitura do nome do jogador
 pub fn read_name() -> String {
   print!("[ DIGITE SEU NICKNAME ] : ");
   io::stdout().flush().unwrap();
@@ -14,6 +14,7 @@ pub fn read_name() -> String {
   nome
 }
 
+// Faz leitura da dica
 pub fn read_tip() -> String {
   print!("[ INFORME A DICA ] : ");
   io::stdout().flush().unwrap();
@@ -24,6 +25,7 @@ pub fn read_tip() -> String {
   tip
 }
 
+// Faz leitura da resposta da rodada
 pub fn read_answer() -> String {
   print!("[ INFORME A RESPOSTA ] : ");
   io::stdout().flush().unwrap();
@@ -34,6 +36,7 @@ pub fn read_answer() -> String {
   answer
 }
 
+// Faz leitura da pergunta do jogador da vez
 pub fn read_ask() -> String {
   print!("[ FAÇA SUA PERGUNTA ] : ");
   io::stdout().flush().unwrap();
@@ -44,6 +47,7 @@ pub fn read_ask() -> String {
   ask
 }
 
+// Faz leitura da resposta para a pergunta do jogador da vez
 pub fn read_sn() -> String {
   print!("[ Resposta <s/n> ] : ");
   io::stdout().flush().unwrap();
@@ -54,6 +58,7 @@ pub fn read_sn() -> String {
   sn
 }
 
+// Faz leitura do palpite do jogador da vez
 pub fn read_palpite() -> String {
   print!("[ DIGITE SEU PALPITE ] : ");
   io::stdout().flush().unwrap();
@@ -64,6 +69,7 @@ pub fn read_palpite() -> String {
   palpite
 }
 
+// Faz leitura da resposta para o palpite do jogador da vez
 pub fn read_resposta() -> String {
   print!("[ RESPOSTA <certo/errado> ] : ");
   io::stdout().flush().unwrap();
@@ -72,4 +78,15 @@ pub fn read_resposta() -> String {
   let stdin = io::stdin();
   stdin.lock().read_line(&mut resposta).expect("Não deu pra ler o que você digitou");
   resposta
+}
+
+// Faz leitura da resposta para se o jogador quer continuar
+pub fn read_continuar() -> String {
+  print!("[ Resposta <yes/no> ] : ");
+  io::stdout().flush().unwrap();
+  
+  let mut continuar = String::new();
+  let stdin = io::stdin();
+  stdin.lock().read_line(&mut continuar).expect("Não deu pra ler o que você digitou");
+  continuar
 }
