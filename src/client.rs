@@ -8,14 +8,14 @@ fn main() {
     
     match TcpStream::connect("localhost:3333") {
         Ok(mut stream) => {
-            println!("SEJA BEM-VINDO AO WHO I AM!");
+            println!("SEJA BEM-VINDO AO WHO AM I!");
 
             println!("--------------------------");
             println!("Aguarde enquanto o jogo começa...");
             println!("--------------------------");
 
-            let mut data = [0 as u8; 50];
-            let mut recebido = String::new();       // Guarda mensagem recebida do servidor
+            let mut data = [0 as u8; 255];
+            let mut recebido;                       // Guarda mensagem recebida do servidor
             let mut nome_jogador = String::new();   // Guarda jogador "desse" terminal
             let mut tip = String::new();            // Dica
             let mut answer = String::new();         // Resposta da rodada
@@ -112,7 +112,7 @@ fn main() {
                   if recebido.starts_with("sn"){
                     let values: Vec<&str> = recebido.rsplit_terminator(":").collect();
                     sn = values.get(0).unwrap().to_string();
-                    println!("[ RESPOSTA : ] {}", sn.trim());
+                    println!("[ RESPOSTA ] : {}", sn.trim());
                     palpite.clear();
                     palpite.push_str(&aux_functions::read_palpite().to_string());
                     stream.write(palpite.as_bytes()).unwrap();
@@ -122,7 +122,7 @@ fn main() {
                   if recebido.starts_with("palpite"){
                     let values: Vec<&str> = recebido.rsplit_terminator(":").collect();
                     palpite = values.get(0).unwrap().to_string();
-                    println!("[ PALPITE : ] {}", palpite.trim());
+                    println!("[ PALPITE ] : {}", palpite.trim());
                     resposta.clear();
                     resposta.push_str(&aux_functions::read_resposta().to_string());
                     stream.write(resposta.as_bytes()).unwrap();
@@ -132,7 +132,7 @@ fn main() {
                   if recebido.starts_with("resposta"){
                     let values: Vec<&str> = recebido.rsplit_terminator(":").collect();
                     resposta = values.get(0).unwrap().to_string();
-                    println!("\n[ JOGADOR {} TENTOU PALPITE E  ESTÁ: ] {}", jog_vez.trim(), resposta.trim());
+                    println!("\n Jogador [{}] tentou o palpite e está : {}", jog_vez.trim(), resposta.trim());
                   }
 
                   // Pergunta se jogador quer continuar e recebe resposta
@@ -152,12 +152,11 @@ fn main() {
                     let values: Vec<&str> = recebido.rsplit_terminator(":").collect();
                     resposta = values.get(0).unwrap().to_string();
                     println!("\n\n{}", resposta.trim());
-                    // println!("\n\n{}", values.len());
                   }
 
                   // Exibe final do jogo
                   if recebido.starts_with("fim"){
-                    println!("\t\t--------------- JOGO FINALIZADO ---------------");
+                    println!("--------------- JOGO FINALIZADO ---------------");
                   }
 
                 },

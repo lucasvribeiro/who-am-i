@@ -49,7 +49,7 @@ pub fn read_ask() -> String {
 
 // Faz leitura da resposta para a pergunta do jogador da vez
 pub fn read_sn() -> String {
-  print!("[ Resposta <s/n> ] : ");
+  print!("[ Resposta <sim/não> ] : ");
   io::stdout().flush().unwrap();
   
   let mut sn = String::new();
@@ -82,7 +82,7 @@ pub fn read_resposta() -> String {
 
 // Faz leitura da resposta para se o jogador quer continuar
 pub fn read_continuar() -> String {
-  print!("[ Resposta <yes/no> ] : ");
+  print!("[ Resposta <sim/não> ] : ");
   io::stdout().flush().unwrap();
   
   let mut continuar = String::new();
