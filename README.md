@@ -1,7 +1,9 @@
-# who-i-am
+# 🎭 "Who am I?"
 
-## Como rodar a aplicação
-Na pasta raiz, rode 'Cargo run'. Esse comando irá iniciar o server. Para iniciar um cliente, compile o arquivo cliente.rs (rustc /src/cliente.rs) e execute (./cliente.exe).
+## About this game
+This game was developed for the Languages Programming's subject. It was developed in Rust using TCPStream.
 
-## Referências:
-Timer: https://docs.rs/tokio/0.1.18/tokio/timer/index.html
+## How to run
+In the root, run the `'Cargo run'` file. This command will start the application server. 
+
+To start a client, run the client.rs file using the command: `rustc /src/cliente.rs`. Then, execute it using: `./cliente.exe`.
